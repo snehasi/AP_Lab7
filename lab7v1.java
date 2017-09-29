@@ -86,7 +86,52 @@ public class lab7v1 {
 		return playlist;
 	}
 	
-	
+	public static String show(ArrayList<Song> playlist) throws ClassNotFoundException, IOException {
+		int c = playlist.size();
+		String ooops="";
+		if(c==0) {
+			ooops="No Song Exist";
+		}
+		else {
+			for(int i=0;i<c;i++) {
+				Song s = playlist.get(i);
+				ooops+=(s.name+" "+s.artist+" "+s.duration);
+			}
+		}
+		
+		System.out.println(ooops);
+		return ooops;
+		//menu(playlist);
+		
+		
+	}
+	public static String search(String sear,ArrayList<Song> playlist) throws ClassNotFoundException, IOException {
+		//search for a song
+		//Scanner in = new Scanner(System.in);
+		String z="";
+		//String sear = in.next();
+		int c = playlist.size();
+		if(c==0) {
+			System.out.println("No Song Exist");
+		}
+		else {
+			//String z;
+			for(int i=0;i<c;i++) {
+				Song s = playlist.get(i);
+				if(s.getsong().equals(sear)) {
+					z=s.name+" "+s.artist+" "+s.duration;
+					break;
+				}
+				else {
+					z="No Song Exist";
+					
+				}
+			}
+			System.out.println(z);
+		}
+		//menu(playlist);
+		return z;
+	}
 	public static void menu(ArrayList<Song> playlist) throws IOException, ClassNotFoundException {
 		Scanner in = new Scanner(System.in);
 		System.out.println("enter 1-add/2-delete/3-search/4-show/5-back and show playlists/6-exit");
@@ -112,43 +157,14 @@ public class lab7v1 {
 			}
 			
 			else if(option==4) {
-				int c = playlist.size();
-				if(c==0) {
-					System.out.println("No Song Exist");
-				}
-				else {
-					for(int i=0;i<c;i++) {
-						Song s = playlist.get(i);
-						System.out.println(s.name+" "+s.artist+" "+s.duration);
-					}
-				}
-				menu(playlist);
-			}
-			else if(option==3) {
-				//search for a song
-				String z="";
-				String sear = in.next();
-				int c = playlist.size();
-				if(c==0) {
-					System.out.println("No Song Exist");
-				}
-				else {
-					//String z;
-					for(int i=0;i<c;i++) {
-						Song s = playlist.get(i);
-						if(s.getsong().equals(sear)) {
-							z=s.name+" "+s.artist+" "+s.duration;
-							break;
-						}
-						else {
-							z="No Song Exist";
-							
-						}
-					}
-					System.out.println(z);
-				}
+				show(playlist);
 				menu(playlist);
 				
+			}
+			else if(option==3) {
+				String sear = in.next();
+				search(sear,playlist);
+				menu(playlist);
 			}
 			else if(option==2) {
 				//delete a song from the playlist
@@ -201,18 +217,18 @@ public class lab7v1 {
 	
 }
 //song objects to be stored in playlist arraylist
-class Song implements Serializable{
-	public String name;
-	public String artist;
-	public int duration;
-	public Song(String n,String a,int ii) {
-		this.name=n;
-		this.artist=a;
-		this.duration=ii;
-	}
-	public String getsong() {
-		return this.name;
-	}
-
-	
-}
+//class Song implements Serializable{
+//	public String name;
+//	public String artist;
+//	public int duration;
+//	public Song(String n,String a,int ii) {
+//		this.name=n;
+//		this.artist=a;
+//		this.duration=ii;
+//	}
+//	public String getsong() {
+//		return this.name;
+//	}
+//
+//	
+//}
