@@ -1,6 +1,7 @@
 package lab7v1;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -25,12 +26,6 @@ public class lab7v1 {
 		String name_playlist = n.next();
 		ArrayList<Song> playlist = new ArrayList<Song>();
 		int num_songs = n.nextInt();
-		//int x =0;
-//		while(n.hasNext() ){
-//			x=x+1;
-//			System.out.println("k");
-//		}
-		
 		System.out.println("number of songs "+num_songs);
 		for(int i=0;i<num_songs;i++) {
 			int ind = n.nextInt();
@@ -38,51 +33,79 @@ public class lab7v1 {
 			String ar = n.next();
 			Song s = new Song(na,ar,ind);
 			playlist.add(s);
-			///implementing serializable
-			ObjectOutputStream out = null;
-			try {
-				out= new ObjectOutputStream(new FileOutputStream("out.txt"));
-				out.writeObject(s);
-			}
-			finally {
-				out.close();
-			}
-			//implement deserializable
 			
 		}
 		//menu
 		//add method
-		menu(playlist);
-		
-		//serialization
-//		String filename = "f.ser";
-//		try {
-//			FileOutputStream file = new FileOutputStream(filename);
-//			ObjectOutputStream out = new ObjectOutputStream(file);
-//			out.writeObject(s);
-//            
-//            out.close();
-//            file.close();
-//             
-//            System.out.println("Object has been serialized");
-//
-//		}
-//		catch(IOException ex){
-//			System.out.println("IOException is caught");
-//		}
-		
+		menu(playlist);	
 	}
-	public static void menu(ArrayList<Song> playlist) throws FileNotFoundException {
+	
+	
+	public static void serialize(String playl) throws IOException {
+		Song s1 = new Song("Amy","Britney",9);
+		ObjectOutputStream out = null;
+		try {
+			out= new ObjectOutputStream(new FileOutputStream(playl+".txt"));
+			out.writeObject(s1);
+		}
+		finally {
+			out.close();
+		}
+	}
+	
+	
+	public static void deserialize(String playl) throws FileNotFoundException, IOException, ClassNotFoundException {
+		ObjectInputStream in=null;
+		try {
+			in=new ObjectInputStream(new FileInputStream("out.txt"));
+			Song s1 = (Song) in.readObject();
+		}
+		finally {
+			in.close();
+		}
+	}
+	
+	
+	public static void menu(ArrayList<Song> playlist) throws IOException {
 		Scanner in = new Scanner(System.in);
-		System.out.println("enter 1-add/2-delete/3-search/4-show/5-back/6-exit");
+		System.out.println("enter 1-add/2-delete/3-search/4-show/5-back and show playlists/6-exit");
 		int option= in.nextInt();
 			//option = in.nextInt();
 			if(option==6) {
 				System.exit(0);
 			}
+			
 			else if(option==5) {
-				menu(playlist);
+				File f = new File("."); // current directory
+			    File[] files = f.listFiles();
+			    for (File file : files) {
+			    		String filename =file.getName();
+			    		if(filename.contains("txt")) {
+			    			System.out.println(filename);
+			    		}
+			    }
+			    String playl2 = in.next();
+			    File f2 = new File("//Users//snehasi//eclipse-workspace//lab7v1//"+playl2+".txt//");
+				Scanner n2 = new Scanner(f2);	
+				//System.out.println(n.next());
+				//correct music playlist being read
+				
+				//make arraylist playlist
+				String name_playlist = n2.next();
+				ArrayList<Song> playlist2 = new ArrayList<Song>();
+				int num_songs2 = n2.nextInt();
+				System.out.println("number of songs "+num_songs2);
+				for(int i=0;i<num_songs2;i++) {
+					int ind2 = n2.nextInt();
+					String na2 = n2.next();
+					String ar2 = n2.next();
+					Song s2 = new Song(na2,ar2,ind2);
+					playlist.add(s2);
+					
+				}
+			    menu(playlist2);
 			}
+			
 			else if(option==4) {
 				int c = playlist.size();
 				if(c==0) {
