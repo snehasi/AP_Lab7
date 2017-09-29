@@ -44,9 +44,7 @@ public class lab7 {
 		playlist.add(ss3);
 		System.out.println(ooo.show(playlist));
 		
-		assertEquals("Sinha ttt 5Sneha tt 4Sister mee 12Sister me 12\n" + 
-				"Sinha ttt 5Sneha tt 4Sister mee 12Sister me 12\n" + 
-				"Sinha ttt 5Sneha tt 4Sister mee 12Sister me 12",ooo.show(playlist));
+		assertEquals("Sinha ttt 5Sneha tt 4Sister me 12",ooo.show(playlist));
 		//System.out.println(ooo.show(playlist));
 		playlist.remove(ss3);
 		assertEquals("Sinha ttt 5Sneha tt 4",ooo.show(playlist));

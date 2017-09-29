@@ -99,7 +99,7 @@ public class lab7v1 {
 			}
 		}
 		
-		System.out.println(ooops);
+		//System.out.println(ooops);
 		return ooops;
 		//menu(playlist);
 		
@@ -157,7 +157,7 @@ public class lab7v1 {
 			}
 			
 			else if(option==4) {
-				show(playlist);
+				System.out.println(show(playlist));
 				menu(playlist);
 				
 			}
